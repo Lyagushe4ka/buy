@@ -46,7 +46,7 @@ async function main() {
       const finalMaxFee = maxFeePerGas ? maxFeePerGas * 2n : parseUnits('5', 'gwei')
       const finalMaxPriorityFee = maxPriorityFeePerGas ? maxPriorityFeePerGas * 2n : parseUnits('1', 'gwei')
 
-      const tx: ContractTransactionResponse = await CONTRACT.contribute({ value, maxFeePerGas: finalMaxFee, maxPriorityFeePerGas: finalMaxPriorityFee })
+      const tx: ContractTransactionResponse = await CONTRACT.contribute({ value, maxFeePerGas, maxPriorityFeePerGas })
 
       const receipt = await tx.wait()
 
