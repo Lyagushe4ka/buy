@@ -1,8 +1,8 @@
 import { Contract, ContractTransactionResponse, JsonRpcProvider, Wallet, parseEther, parseUnits } from "ethers"
 import abi from './abi.json'
 
-const key = process.env.KEY;
-const ethValue = process.env.VALUE;
+const key = ''; // private key
+const ethValue = ''; // eth value to send, e.g. 0.1 or 1
 const CONTRACT_ADDRESS = '0xB6e19aABF457740e0077eb112805B3abab04A9f9';
 const TIMESTAMP = 1704546000000;
 
