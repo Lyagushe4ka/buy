@@ -4,6 +4,7 @@ import abi from './abi.json'
 const key = process.env.KEY;
 const ethValue = process.env.VALUE;
 const CONTRACT_ADDRESS = '0xB6e19aABF457740e0077eb112805B3abab04A9f9';
+const TIMESTAMP = 1704546000000;
 
 const providers = [
   'https://arbitrum.llamarpc.com',
@@ -23,22 +24,18 @@ async function main() {
   while (true) {
     const url = providers[Math.floor(Math.random() * providers.length)]
 
+    const currTime = Date.now()
+
+    if (currTime < TIMESTAMP) {
+      console.log(`Waiting until ${TIMESTAMP}`)
+      await new Promise(r => setTimeout(r, 100))
+      continue;
+    }
+
     const PROVIDER = new JsonRpcProvider(url)
 
     const WALLET = new Wallet(key, PROVIDER)
     const CONTRACT = new Contract(CONTRACT_ADDRESS, abi, WALLET)
-
-    let block = 0
-    try {
-      block = await PROVIDER.getBlockNumber()
-    } catch (e: any) {
-      continue;
-    }
-
-    if (block < 1704546000) {
-      console.log(`Block ${block} is too early, waiting...`)
-      continue;
-    }
 
     try {
 
