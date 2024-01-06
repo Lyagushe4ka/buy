@@ -1,0 +1,372 @@
+[{
+  "inputs": [{
+      "internalType": "contract IERC20Metadata",
+      "name": "_token",
+      "type": "address"
+  }],
+  "stateMutability": "nonpayable",
+  "type": "constructor"
+}, {
+  "inputs": [],
+  "name": "AddressCapExceeded",
+  "type": "error"
+}, {
+  "inputs": [],
+  "name": "DistributionEnded",
+  "type": "error"
+}, {
+  "inputs": [],
+  "name": "DistributionNotStarted",
+  "type": "error"
+}, {
+  "inputs": [],
+  "name": "EthAmountMustBeGreaterThanZero",
+  "type": "error"
+}, {
+  "inputs": [],
+  "name": "RefundFailed",
+  "type": "error"
+}, {
+  "inputs": [],
+  "name": "SendingEthToSafeFailed",
+  "type": "error"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": true,
+      "internalType": "address",
+      "name": "user",
+      "type": "address"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "ethAmount",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "tokenAmount",
+      "type": "uint256"
+  }],
+  "name": "Contribute",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "amount",
+      "type": "uint256"
+  }],
+  "name": "EmergencyWithdrawTokens",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "totalTokensToDistribute",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "ethPerToken",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "maxEthContributionPerAddress",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "distributionStartTimestamp",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "distributionEndTimestamp",
+      "type": "uint256"
+  }, {
+      "indexed": false,
+      "internalType": "address",
+      "name": "safe",
+      "type": "address"
+  }],
+  "name": "InitializeDistributor",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": true,
+      "internalType": "address",
+      "name": "previousOwner",
+      "type": "address"
+  }, {
+      "indexed": true,
+      "internalType": "address",
+      "name": "newOwner",
+      "type": "address"
+  }],
+  "name": "OwnershipTransferStarted",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": true,
+      "internalType": "address",
+      "name": "previousOwner",
+      "type": "address"
+  }, {
+      "indexed": true,
+      "internalType": "address",
+      "name": "newOwner",
+      "type": "address"
+  }],
+  "name": "OwnershipTransferred",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": false,
+      "internalType": "address",
+      "name": "account",
+      "type": "address"
+  }],
+  "name": "Paused",
+  "type": "event"
+}, {
+  "anonymous": false,
+  "inputs": [{
+      "indexed": false,
+      "internalType": "address",
+      "name": "account",
+      "type": "address"
+  }],
+  "name": "Unpaused",
+  "type": "event"
+}, {
+  "inputs": [],
+  "name": "acceptOwnership",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "contribute",
+  "outputs": [],
+  "stateMutability": "payable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "distributionEndTimestamp",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "distributionStartTimestamp",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [{
+      "internalType": "uint256",
+      "name": "amount",
+      "type": "uint256"
+  }],
+  "name": "emergencyWithdrawTokens",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "ethContributed",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [{
+      "internalType": "address",
+      "name": "",
+      "type": "address"
+  }],
+  "name": "ethContributedAddress",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "ethPerToken",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [{
+      "internalType": "uint256",
+      "name": "_totalTokensToDistribute",
+      "type": "uint256"
+  }, {
+      "internalType": "uint256",
+      "name": "_ethPerToken",
+      "type": "uint256"
+  }, {
+      "internalType": "uint256",
+      "name": "_maxEthContributionPerAddress",
+      "type": "uint256"
+  }, {
+      "internalType": "uint256",
+      "name": "_distributionStartTimestamp",
+      "type": "uint256"
+  }, {
+      "internalType": "uint256",
+      "name": "_distributionEndTimestamp",
+      "type": "uint256"
+  }, {
+      "internalType": "contract GnosisSafeL2",
+      "name": "_safe",
+      "type": "address"
+  }],
+  "name": "initializeDistributor",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "maxEthContributionPerAddress",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "owner",
+  "outputs": [{
+      "internalType": "address",
+      "name": "",
+      "type": "address"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "pause",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "paused",
+  "outputs": [{
+      "internalType": "bool",
+      "name": "",
+      "type": "bool"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "pendingOwner",
+  "outputs": [{
+      "internalType": "address",
+      "name": "",
+      "type": "address"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "renounceOwnership",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "safe",
+  "outputs": [{
+      "internalType": "contract GnosisSafeL2",
+      "name": "",
+      "type": "address"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "token",
+  "outputs": [{
+      "internalType": "contract IERC20Metadata",
+      "name": "",
+      "type": "address"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "tokenDecimals",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "tokensDistributed",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "totalTokensToDistribute",
+  "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}, {
+  "inputs": [{
+      "internalType": "address",
+      "name": "newOwner",
+      "type": "address"
+  }],
+  "name": "transferOwnership",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}, {
+  "inputs": [],
+  "name": "unpause",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+}]
